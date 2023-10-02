@@ -7,7 +7,7 @@
   "license": "MIT",
   "workspaces": ["frontend", "backend"],
   "private": true,
-    "scripts": {
+  "scripts": {
     "start:frontend": "cd frontend && yarn dev",
     "start:backend": "cd backend && yarn start"
   }

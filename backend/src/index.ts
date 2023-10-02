@@ -1,10 +1,20 @@
 import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { typeDefs } from './schema';
+import { resolvers } from './resolvers';
 
-const app = express();
-const PORT = 3001;
+async function startApolloServer() {
+  const app = express();
+  const server = new ApolloServer({ typeDefs, resolvers });
 
-app.get('/', (req, res) => res.send('Hello, World!'));
+  await server.start();  // Note this line
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  server.applyMiddleware({ app, path: '/graphql' });
+
+  const PORT = 3001;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is ready at http://localhost:${PORT}${server.graphqlPath}`);
+  });
+}
+
+startApolloServer();
