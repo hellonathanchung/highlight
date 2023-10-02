@@ -1,0 +1,14 @@
+{
+  "name": "highlight",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://hellonathanchung@github.com/hellonathanchung/highlight.git",
+  "author": "Nathan Chung <chung.nathanh@gmail.com>",
+  "license": "MIT",
+  "workspaces": ["frontend", "backend"],
+  "private": true,
+    "scripts": {
+    "start:frontend": "cd frontend && yarn dev",
+    "start:backend": "cd backend && yarn start"
+  }
+}
