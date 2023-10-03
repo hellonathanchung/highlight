@@ -6,5 +6,5 @@
     "baseUrl": "./"
     // ... other backend-specific options
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "node_modules/@types"]
 }

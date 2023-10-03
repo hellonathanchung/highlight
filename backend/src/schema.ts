@@ -1,27 +1,15 @@
-import { gql } from 'apollo-server-express';
+// src/graphql/schema.ts
 
-export const typeDefs = gql`
-  type File {
-    id: ID!
-    path: String!
-    filename: String!
-    mimetype: String!
-  }
+import { makeExecutableSchema } from 'graphql-tools';
+import { typeDefs as mainTypeDefs, resolvers as mainResolvers } from './mainSchema';
+import { typeDefs as mutationsTypeDefs } from './mutations'; // Import the mutations
 
-  type Highlight {
-    id: ID!
-    fileId: ID!
-    text: String!
-    // Add more fields as per your requirements
-  }
+const typeDefs = [mainTypeDefs, mutationsTypeDefs]; // Combine the main schema and mutations
+const resolvers = mainResolvers; // You can extend the resolvers here if needed
 
-  type Query {
-    getFiles: [File]
-    getHighlights(fileId: ID!): [Highlight]
-  }
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
 
-  type Mutation {
-    uploadFile(file: Upload!): File!
-    addHighlight(fileId: ID!, text: String!): Highlight!
-  }
-`;
+export default schema;
