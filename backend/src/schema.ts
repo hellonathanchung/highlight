@@ -8,12 +8,20 @@ export const typeDefs = gql`
     mimetype: String!
   }
 
+  type Highlight {
+    id: ID!
+    fileId: ID!
+    text: String!
+    // Add more fields as per your requirements
+  }
+
   type Query {
-    hello: String
-    files: [File]
+    getFiles: [File]
+    getHighlights(fileId: ID!): [Highlight]
   }
 
   type Mutation {
     uploadFile(file: Upload!): File!
+    addHighlight(fileId: ID!, text: String!): Highlight!
   }
 `;

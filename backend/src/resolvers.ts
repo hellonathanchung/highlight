@@ -1,24 +1,20 @@
-// @ts-ignore
-import { FileUpload } from 'graphql-upload';
-import path from 'path';
-import fs from 'fs';
-import { pipeline } from 'stream';
-import util from 'util';
+// Import the necessary modules and entities
 
 export const resolvers = {
   Query: {
-    hello: () => "Hello, World!",
-    files: () => { /* TODO: Retrieve from database */ }
+    getFiles: async () => {
+      // TODO: Fetch files from the database
+    },
+    getHighlights: async (_: any, { fileId }: { fileId: number }) => {
+      // TODO: Fetch highlights from the database based on the fileId
+    }
   },
   Mutation: {
     uploadFile: async (_: any, { file }: { file: FileUpload }) => {
-      const { createReadStream, filename, mimetype } = await file;
-      const filePath = path.join(__dirname, `../../uploads/${filename}`);
-      const stream = createReadStream();
-      const pipe = util.promisify(stream.pipe.bind(stream));
-      await pipe(fs.createWriteStream(filePath));
-      // TODO: Save file metadata to database
-      return { id: "1", path: filePath, filename, mimetype };
+      // TODO: Handle file upload and save the record in the database
     },
+    addHighlight: async (_: any, { fileId, text }: { fileId: number, text: string }) => {
+      // TODO: Add highlight to the database
+    }
   },
 };
